@@ -71,7 +71,7 @@ This package provides a few utilities to make it easier to log errors:
 - [formatErrorMessage](src/utilities.ts)  
   Formats an error message for use as the main message, falling back to a default message when 
   no message is available.
-- [formatErrorCause](src/utilities.ts)
+- [formatErrorCause](src/utilities.ts)  
   formats an error message for use as a complement to the main message, falling back to a 
   default message when no message is available.
 
