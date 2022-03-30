@@ -1,5 +1,4 @@
 /* eslint-disable no-console -- Needed for testing */
-
 import {extractErrorMessage, formatErrorCause, formatErrorMessage} from '../src';
 
 describe('A function for extracting error messages', () => {
