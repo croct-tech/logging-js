@@ -1,4 +1,3 @@
-/* eslint-disable no-console -- Needed for testing */
 import {Log, Logger, LogLevel} from '../src/logger';
 import {PrefixedLogger} from '../src/prefixedLogger';
 
