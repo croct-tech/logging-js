@@ -1,4 +1,4 @@
-name: Release deploy
+name: Release
 
 on:
   release:
@@ -9,13 +9,10 @@ jobs:
   deploy-release:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: 'https://npm.pkg.github.com'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Cache dependencies
         id: cache-dependencies
@@ -36,18 +33,26 @@ jobs:
 
       - name: Prepare release
         run: |-
-          cp package.json README.md build/
-          cd build
+          cp package.json LICENSE README.md dist/
+          cd dist
           sed -i -e "s~\"version\": \"0.0.0-dev\"~\"version\": \"${GITHUB_REF##*/}\"~" package.json
+          sed -i -e "s~\"main\": \"dist/index.js\"~\"main\": \"index.js\"~" package.json
+          sed -i -e "s~\"types\": \"dist/index.d.ts\"~\"types\": \"index.d.ts\"~" package.json
 
       - name: Publish pre-release to NPM
         if: ${{ github.event.release.prerelease }}
         run: |-
-          cd build
-          npm publish --tag next
+          cd dist
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+          npm publish --access public --tag next
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish release to NPM
         if: ${{ !github.event.release.prerelease }}
         run: |-
-          cd build
-          NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} npm publish
+          cd dist
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+          npm publish --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
