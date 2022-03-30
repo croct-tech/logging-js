@@ -23,6 +23,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
+          registry-url: 'https://npm.pkg.github.com'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Cache dependencies
         id: cache-dependencies
@@ -47,6 +50,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
+          registry-url: 'https://npm.pkg.github.com'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Cache dependencies
         id: cache-dependencies
@@ -69,6 +75,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
+          registry-url: 'https://npm.pkg.github.com'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Cache dependencies
         id: cache-dependencies
@@ -83,3 +92,33 @@ jobs:
 
       - name: Check coding standard violations
         run: npm run lint
+
+  run-tests:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: 'https://npm.pkg.github.com'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: npm run test
+          coverageLocations:
+            ./coverage/lcov.info:lcov

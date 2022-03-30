@@ -26,7 +26,7 @@ export enum LogLevel {
     WARNING = 'warning',
 
     /**
-     * Errors that prevent the SDK from performing its intended actions.
+     * Errors that prevent the system from working as intended.
      */
     ERROR = 'error',
 }

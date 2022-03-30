@@ -6,7 +6,9 @@ import {Log, LogDetails, Logger, LogLevel} from './logger';
  */
 export class ConsoleLogger<T extends LogDetails = LogDetails> implements Logger<T> {
     public log(log: Log<T>): void {
-        const args = [log.message, ...(log.details !== undefined ? [log.details] : [])];
+        const args = log.details === undefined
+            ? [log.message]
+            : [log.message, log.details];
 
         switch (log.level) {
             case LogLevel.DEBUG:

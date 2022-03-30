@@ -62,18 +62,12 @@ This package provides the following implementations:
 ## Utilities
 
 Because JavaScript allows throwing pretty much anything, proving more information about the error 
-often requires a lot of boilerplate. 
+often requires some boilerplate code. 
 
 This package provides a few utilities to make it easier to log errors:
 
 - [extractErrorMessage](src/utilities.ts)  
   Extracts the error message from an unknown caught error.
-- [formatErrorMessage](src/utilities.ts)  
-  Formats an error message for use as the main message, falling back to a default message when 
-  no message is available.
-- [formatErrorCause](src/utilities.ts)  
-  formats an error message for use as a complement to the main message, falling back to a 
-  default message when no message is available.
 
 ## Contributing
 
