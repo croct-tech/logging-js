@@ -1,30 +1,16 @@
 /* eslint-disable no-console -- Needed for testing */
-import {LogLevel} from '../src/logger';
-import {ConsoleLogger} from '../src/consoleLogger';
+import {ConsoleLogger, LogLevel} from '../src';
 
 describe('A console logger', () => {
+    const mockedConsole: jest.MockedObject<Console> = {
+        warn: jest.fn().mockName('warn'),
+        error: jest.fn().mockName('error'),
+        info: jest.fn().mockName('info'),
+        debug: jest.fn().mockName('debug'),
+    } as jest.MockedObject<Console>;
+
     it('should log to the console', () => {
-        jest.spyOn(console, 'debug').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'info').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'log').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'warn').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'error').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        const logger = new ConsoleLogger();
+        const logger = new ConsoleLogger(mockedConsole);
 
         logger.log({
             level: LogLevel.DEBUG,
@@ -58,32 +44,32 @@ describe('A console logger', () => {
             },
         });
 
-        expect(console.debug).toHaveBeenCalledTimes(1);
-        expect(console.debug).toHaveBeenCalledWith(
+        expect(mockedConsole.debug).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.debug).toHaveBeenCalledWith(
             'This is a debug message',
             {
                 cause: 'This is a cause',
             },
         );
 
-        expect(console.info).toHaveBeenCalledTimes(1);
-        expect(console.info).toHaveBeenCalledWith(
+        expect(mockedConsole.info).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.info).toHaveBeenCalledWith(
             'This is an info message',
             {
                 cause: 'This is a cause',
             },
         );
 
-        expect(console.warn).toHaveBeenCalledTimes(1);
-        expect(console.warn).toHaveBeenCalledWith(
+        expect(mockedConsole.warn).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.warn).toHaveBeenCalledWith(
             'This is a warning message',
             {
                 cause: 'This is a cause',
             },
         );
 
-        expect(console.error).toHaveBeenCalledTimes(1);
-        expect(console.error).toHaveBeenCalledWith(
+        expect(mockedConsole.error).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.error).toHaveBeenCalledWith(
             'This is an error message',
             {
                 cause: 'This is a cause',
@@ -92,27 +78,7 @@ describe('A console logger', () => {
     });
 
     it('should omit the details if not specified', () => {
-        jest.spyOn(console, 'debug').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'info').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'log').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'warn').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        jest.spyOn(console, 'error').mockImplementationOnce(() => {
-            // Suppress the console output
-        });
-
-        const logger = new ConsoleLogger();
+        const logger = new ConsoleLogger(mockedConsole);
 
         logger.log({
             level: LogLevel.DEBUG,
@@ -134,16 +100,16 @@ describe('A console logger', () => {
             message: 'This is an error message',
         });
 
-        expect(console.debug).toHaveBeenCalledTimes(1);
-        expect(console.debug).toHaveBeenCalledWith('This is a debug message');
+        expect(mockedConsole.debug).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.debug).toHaveBeenCalledWith('This is a debug message');
 
-        expect(console.info).toHaveBeenCalledTimes(1);
-        expect(console.info).toHaveBeenCalledWith('This is an info message');
+        expect(mockedConsole.info).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.info).toHaveBeenCalledWith('This is an info message');
 
-        expect(console.warn).toHaveBeenCalledTimes(1);
-        expect(console.warn).toHaveBeenCalledWith('This is a warning message');
+        expect(mockedConsole.warn).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.warn).toHaveBeenCalledWith('This is a warning message');
 
-        expect(console.error).toHaveBeenCalledTimes(1);
-        expect(console.error).toHaveBeenCalledWith('This is an error message');
+        expect(mockedConsole.error).toHaveBeenCalledTimes(1);
+        expect(mockedConsole.error).toHaveBeenCalledWith('This is an error message');
     });
 });
