@@ -53,11 +53,11 @@ export type Log<D extends LogDetails = LogDetails> = {
 /**
  * A common interface for loggers.
  */
-export interface Logger<D extends LogDetails = LogDetails> {
+export interface Logger<L extends Log = Log> {
     /**
      * Logs a message.
      *
      * @param log The log message.
      */
-    log(log: Log<D>): void;
+    log(log: L): void;
 }
