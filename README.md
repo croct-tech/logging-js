@@ -58,6 +58,8 @@ This package provides the following implementations:
   A logger that writes to the console using the appropriate console API semantics.
 - [PrefixedLogger](src/prefixedLogger.ts)  
   A logger that prepends a prefix to all log messages.
+- [InMemoryLogger](src/inMemoryLogger.ts)  
+  A logger that stores all log messages in memory.
 
 ## Utilities
 
