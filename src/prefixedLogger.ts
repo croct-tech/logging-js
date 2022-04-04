@@ -1,9 +1,9 @@
-import {Log, LogDetails, Logger} from './logger';
+import {Log, Logger} from './logger';
 
 /**
  * A logger that prepends a prefix to all log messages.
  */
-export class PrefixedLogger<T extends LogDetails = LogDetails> implements Logger<T> {
+export class PrefixedLogger<T extends Log = Log> implements Logger<T> {
     /**
      * The logger to which messages are forwarded.
      */
@@ -25,7 +25,7 @@ export class PrefixedLogger<T extends LogDetails = LogDetails> implements Logger
         this.prefix = prefix;
     }
 
-    public log({message, ...log}: Log<T>): void {
+    public log({message, ...log}: T): void {
         this.logger.log({
             message: `[${this.prefix}] ${message}`,
             ...log,
