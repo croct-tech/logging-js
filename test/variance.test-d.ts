@@ -9,9 +9,9 @@ type TestLog = Log<{
 }>;
 
 // Covariance Log test:
-//   A custom Log type must be assignable to the base logger type.
+// A custom Log type must be assignable to the base logger type.
 receive<Log>(make<TestLog>());
 
 // Contravariance Logger test:
-//   A base logger must be assignable to a logger with a custom Log type.
+// A base logger must be assignable to a logger with a custom Log type.
 receive<Logger<TestLog>>(make<Logger>());
