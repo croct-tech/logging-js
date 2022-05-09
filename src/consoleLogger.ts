@@ -18,18 +18,22 @@ export class ConsoleLogger<T extends Log = Log> implements Logger<T> {
         switch (log.level) {
             case LogLevel.DEBUG:
                 this.console.debug(...args);
+
                 break;
 
             case LogLevel.INFO:
                 this.console.info(...args);
+
                 break;
 
             case LogLevel.WARNING:
                 this.console.warn(...args);
+
                 break;
 
             case LogLevel.ERROR:
                 this.console.error(...args);
+
                 break;
         }
     }
