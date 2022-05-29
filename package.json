@@ -44,6 +44,6 @@
     "**/*.ts"
   ],
   "dependencies": {
-    "@croct/json": "^1.0.0"
+    "@croct/json": "^1.1"
   }
 }

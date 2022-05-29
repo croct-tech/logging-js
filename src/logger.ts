@@ -1,9 +1,9 @@
-import {JsonCompatibleObject} from '@croct/json';
+import {ReadonlyJsonCompatibleObject} from '@croct/json';
 
 /**
  * Additional information about the log message.
  */
-export type LogDetails = JsonCompatibleObject;
+export type LogDetails = ReadonlyJsonCompatibleObject;
 
 /**
  * The severity of the log message.
@@ -48,7 +48,7 @@ export type Log<D extends LogDetails = LogDetails> = {
      * The log message.
      */
     message: string,
-} & (JsonCompatibleObject extends D ? {details?: D} : {details: D});
+} & (LogDetails extends D ? {details?: D} : {details: D});
 
 /**
  * A common interface for loggers.
