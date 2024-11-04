@@ -63,7 +63,7 @@ This package provides the following implementations:
 - [MultiLogger](src/multiLogger.ts)  
   A logger that sends logs to multiple loggers.
 - [FilteredLogger](src/filteredLogger.ts)  
-  A logger that filters logs according to log level.
+  A logger wrapper that filters logs according to log level.
 
 ## Utilities
 
