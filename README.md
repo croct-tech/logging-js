@@ -60,6 +60,10 @@ This package provides the following implementations:
   A logger that prepends a prefix to all log messages.
 - [InMemoryLogger](src/inMemoryLogger.ts)  
   A logger that stores all log messages in memory.
+- [MultiLogger](src/multiLogger.ts)  
+  A logger that sends logs to multiple loggers.
+- [FilteredLogger](src/filteredLogger.ts)  
+  A logger wrapper that filters logs according to log level.
 
 ## Utilities
 
