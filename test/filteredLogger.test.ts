@@ -1,5 +1,4 @@
-import {InMemoryLogger, Log, LogLevel} from '../src';
-import {FilteredLogger} from '../src/filteredLogger';
+import {FilteredLogger, InMemoryLogger, Log, LogLevel} from '../src';
 
 describe('A filtered logger', () => {
     const debugLog: Log = {
@@ -38,12 +37,12 @@ describe('A filtered logger', () => {
 
     it('should filter the specified levels', () => {
         const logger = new InMemoryLogger();
-        const filteredLogger = new FilteredLogger(logger, [LogLevel.ERROR, LogLevel.DEBUG]);
+        const filteredLogger = new FilteredLogger(logger, LogLevel.WARNING);
 
         for (const log of logs) {
             filteredLogger.log(log);
         }
 
-        expect(logger.getLogs()).toStrictEqual([debugLog, errorLog]);
+        expect(logger.getLogs()).toStrictEqual([warningLog, errorLog]);
     });
 });
