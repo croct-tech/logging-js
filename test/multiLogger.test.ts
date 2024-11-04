@@ -46,7 +46,7 @@ describe('An in-memory logger', () => {
         expect(secondLogger.getLogs()).toEqual(logs);
     });
 
-    it('should throw an error with the underlying error messages', () => {
+    it('should throw an error with underlying fail messages', () => {
         const firstLogger = new InMemoryLogger();
         const secondLogger = new InMemoryLogger();
         const multiLogger = new MultiLogger([firstLogger, secondLogger]);
