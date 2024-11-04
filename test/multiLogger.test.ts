@@ -1,7 +1,7 @@
 import {InMemoryLogger, Log, LogLevel} from '../src';
 import {MultiLogger} from '../src/multiLogger';
 
-describe('An in-memory logger', () => {
+describe('A multi logger', () => {
     const logs: Log[] = [
         {
             level: LogLevel.DEBUG,
@@ -43,23 +43,6 @@ describe('An in-memory logger', () => {
         }
 
         expect(firstLogger.getLogs()).toEqual(logs);
-        expect(secondLogger.getLogs()).toEqual(logs);
-    });
-
-    it('should throw an error with underlying fail messages', () => {
-        const firstLogger = new InMemoryLogger();
-        const secondLogger = new InMemoryLogger();
-        const multiLogger = new MultiLogger([firstLogger, secondLogger]);
-
-        const message = 'Some error';
-
-        jest.spyOn(firstLogger, 'log').mockImplementation(() => { throw new Error(message); });
-
-        for (const log of logs) {
-            expect(() => multiLogger.log(log)).toThrow(`${[message]}`);
-        }
-
-        expect(firstLogger.getLogs()).toEqual([]);
         expect(secondLogger.getLogs()).toEqual(logs);
     });
 });

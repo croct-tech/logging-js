@@ -38,10 +38,10 @@ describe('A filtered logger', () => {
 
     it('should filter the specified levels', () => {
         const logger = new InMemoryLogger();
-        const suppressedLogger = new FilteredLogger(logger, [LogLevel.ERROR, LogLevel.DEBUG]);
+        const filteredLogger = new FilteredLogger(logger, [LogLevel.ERROR, LogLevel.DEBUG]);
 
         for (const log of logs) {
-            suppressedLogger.log(log);
+            filteredLogger.log(log);
         }
 
         expect(logger.getLogs()).toStrictEqual([debugLog, errorLog]);
