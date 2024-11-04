@@ -6,17 +6,22 @@ import {Log, Logger, LogLevel} from './logger';
 export class FilteredLogger<T extends Log = Log> implements Logger<T> {
     private readonly logger: Logger<T>;
 
-    private readonly levelIndex: number;
+    private readonly level: LogLevel;
+
+    private static readonly logLevelMap: Record<LogLevel, number> = {
+        [LogLevel.DEBUG]: 0,
+        [LogLevel.INFO]: 1,
+        [LogLevel.WARNING]: 2,
+        [LogLevel.ERROR]: 3,
+    };
 
     public constructor(logger: Logger<T>, level: LogLevel) {
         this.logger = logger;
-        this.levelIndex = Object.values(LogLevel).findIndex(value => value === level);
+        this.level = level;
     }
 
     public log(log: T): void {
-        const index = Object.values(LogLevel).findIndex(value => value === log.level);
-
-        if (index >= this.levelIndex) {
+        if (FilteredLogger.logLevelMap[log.level] >= FilteredLogger.logLevelMap[this.level]) {
             this.logger.log(log);
         }
     }
