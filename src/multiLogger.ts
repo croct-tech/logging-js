@@ -1,7 +1,7 @@
 import {Log, Logger} from './logger';
 
 /**
- * A logger send logs to multiple loggers.
+ * A logger that send logs to multiple loggers.
  */
 export class MultiLogger<T extends Log = Log> implements Logger<T> {
     private readonly loggers: Array<Logger<T>> = [];
