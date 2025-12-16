@@ -8,10 +8,8 @@
      An interoperability layer for logging libraries.
 </p>
 <p align="center">
-        <a href="https://www.npmjs.com/package/@croct/logging"><img alt="Version" src="https://img.shields.io/npm/v/@croct/logging"/></a>
+    <a href="https://www.npmjs.com/package/@croct/logging"><img alt="Version" src="https://img.shields.io/npm/v/@croct/logging"/></a>
     <a href="https://github.com/croct-tech/logging-js/actions/workflows/validate-branch.yaml"><img alt="Build" src="https://github.com/croct-tech/logging-js/actions/workflows/validate-branch.yaml/badge.svg" /></a>
-    <a href="https://qlty.sh/gh/croct-tech/projects/logging-js"><img src="https://qlty.sh/badges/8a8eb9ca-1b3b-44fb-842a-b0cae7cb7564/coverage.svg" alt="Code Coverage" /></a>
-<a href="https://qlty.sh/gh/croct-tech/projects/logging-js"><img src="https://qlty.sh/badges/8a8eb9ca-1b3b-44fb-842a-b0cae7cb7564/maintainability.svg" alt="Maintainability" /></a>
 <br />
     <br />
     <a href="https://github.com/croct-tech/logging-js/releases">📦 Releases</a>
