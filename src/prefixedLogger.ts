@@ -1,4 +1,4 @@
-import {Log, Logger} from './logger';
+import type {Log, Logger} from './logger';
 
 /**
  * A logger that prepends a prefix to all log messages.

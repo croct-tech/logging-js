@@ -1,4 +1,5 @@
-import {Log, Logger, LogLevel} from './logger';
+import type {Log, Logger} from './logger';
+import {LogLevel} from './logger';
 
 /**
  * A logger that writes to the console.

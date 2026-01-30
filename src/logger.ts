@@ -1,4 +1,4 @@
-import {ReadonlyJsonCompatibleObject} from '@croct/json';
+import type {ReadonlyJsonCompatibleObject} from '@croct/json';
 
 /**
  * Additional information about the log message.
