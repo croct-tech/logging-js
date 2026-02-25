@@ -34,7 +34,7 @@
     "@croct/eslint-plugin": "^0.8.3",
     "@types/jest": "^30.0.0",
     "@typescript-eslint/parser": "^8.54.0",
-    "eslint": "^10.0.0",
+    "eslint": "^9.39.2",
     "jest": "^30.0.0",
     "ts-jest": "^29.0.0",
     "typescript": "^5.0.0"
