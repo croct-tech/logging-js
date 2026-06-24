@@ -35,8 +35,8 @@
     "@types/jest": "^30.0.0",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^9.39.2",
-    "jest": "^30.0.0",
-    "ts-jest": "^29.0.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.9",
     "typescript": "^5.0.0"
   },
   "files": [
