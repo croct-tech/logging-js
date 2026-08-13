@@ -21,7 +21,7 @@ export function extractErrorMessage(error: unknown, defaultMessage = 'Unknown er
 }
 
 /**
- * The details extracted from an error of unknown type.
+ * Extracted details about an error value.
  */
 export type ErrorDetails = {
     /** The error message. */
@@ -30,7 +30,7 @@ export type ErrorDetails = {
     /** The stack trace of the error, if available. */
     stack?: string,
 
-    /** The details of the error that caused this error, if any. */
+    /** The details of the error that caused this error, if part of a chain. **/
     cause?: ErrorDetails,
 };
 
@@ -53,8 +53,8 @@ export function extractErrorDetails(error: unknown, defaultMessage = 'Unknown er
 
     if (
         typeof error !== 'object'
-            || !(error instanceof Error)
-                || error.message === ''
+        || !(error instanceof Error)
+        || error.message === ''
     ) {
         return {message: defaultMessage};
     }
