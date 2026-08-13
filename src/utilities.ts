@@ -30,7 +30,7 @@ export type ErrorDetails = {
     /** The stack trace of the error, if available. */
     stack?: string,
 
-    /** The details of the error that caused this error, if part of a chain. **/
+    /** The details of the error that caused this error, if part of a chain. */
     cause?: ErrorDetails,
 };
 
