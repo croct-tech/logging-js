@@ -88,6 +88,38 @@ describe('A function for extracting error details', () => {
             cause: {message: 'Cause message.'},
         });
     });
+    it('should ignore a circular cause', () => {
+        const error = new Error('Error message.');
+        const cause = new Error('Cause message.');
+
+        delete error.stack;
+        delete cause.stack;
+        error.cause = cause;
+        cause.cause = error;
+
+        expect(extractErrorDetails(error)).toEqual({
+            message: 'Error message.',
+            cause: {message: 'Cause message.'},
+        });
+    });
+
+    it('should limit the cause recursion depth', () => {
+        const errors = Array.from({length: 12}, (_, index) => new Error(`Error ${index}.`));
+
+        for (let index = 0; index < errors.length - 1; index++) {
+            errors[index].cause = errors[index + 1];
+        }
+
+        let details: ErrorDetails | undefined = extractErrorDetails(errors[0]);
+        const messages: string[] = [];
+
+        while (details !== undefined) {
+            messages.push(details.message);
+            details = details.cause;
+        }
+
+        expect(messages).toEqual(Array.from({length: 11}, (_, index) => `Error ${index}.`));
+    });
 
     it.each<[unknown, string|undefined, string]>([
         [new Error(''), undefined, 'Unknown error'],

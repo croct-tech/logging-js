@@ -39,7 +39,7 @@ export type ErrorDetails = {
  *
  * If the error is a non-empty string, the string itself is used as the message.
  * Otherwise, if the error is an `Error` with a non-empty message, its message, stack trace, and cause
- * are extracted; the cause is extracted recursively using the same default message.
+ * are extracted; causes are extracted recursively up to a fixed depth, ignoring cycles.
  *
  * @param error The error to extract the details.
  * @param defaultMessage The default message if the error is not a non-empty string or an `Error` with a message.
@@ -47,6 +47,17 @@ export type ErrorDetails = {
  * @returns The extracted details, including the stack trace and the cause, when available.
  */
 export function extractErrorDetails(error: unknown, defaultMessage = 'Unknown error'): ErrorDetails {
+    return extractErrorDetailsAtDepth(error, defaultMessage, 0, []);
+}
+
+const MAX_ERROR_CAUSE_DEPTH = 10;
+
+function extractErrorDetailsAtDepth(
+    error: unknown,
+    defaultMessage: string,
+    depth: number,
+    ancestors: Array<unknown>,
+): ErrorDetails {
     if (typeof error === 'string' && error !== '') {
         return {message: error};
     }
@@ -65,8 +76,14 @@ export function extractErrorDetails(error: unknown, defaultMessage = 'Unknown er
         details.stack = error.stack;
     }
 
-    if (error.cause !== undefined) {
-        details.cause = extractErrorDetails(error.cause, defaultMessage);
+    ancestors.push(error);
+
+    if (
+        error.cause !== undefined
+        && depth < MAX_ERROR_CAUSE_DEPTH
+        && !ancestors.includes(error.cause)
+    ) {
+        details.cause = extractErrorDetailsAtDepth(error.cause, defaultMessage, depth + 1, ancestors);
     }
 
     return details;
