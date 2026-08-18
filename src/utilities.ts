@@ -56,7 +56,7 @@ function extractErrorDetailsAtDepth(
     error: unknown,
     defaultMessage: string,
     depth: number,
-    ancestors: Array<unknown>,
+    ancestors: unknown[],
 ): ErrorDetails {
     if (typeof error === 'string' && error !== '') {
         return {message: error};
